@@ -90,7 +90,7 @@ To get the radius the quadratic coefficients have to be calculated again in with
 The position of the car is considered to be in the center of the image. The deviation of the center between the detected lane lines and the image center gives the eccentricity of the car.
 
 #### Smoothing Output
-To smooth the lane line detection the fitted x coordinates that happened to be valid will be stored in an array first. The lane line fits which are actually deployed on the images are an average of the last 7 valid fits.
+To smooth the lane line detection the fitted x coordinates that happened to be valid will be stored in an array first. The fitted lane lines, which are actually deployed on the images, are an average of the last 7 valid fits.
 
 
 Here's a [link to my video result](./output_images/out.mp4)
