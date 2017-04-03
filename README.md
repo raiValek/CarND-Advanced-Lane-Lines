@@ -13,14 +13,14 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[imageDistort]: ./examples/distorted.png "Distorted"
-[imageUndistort]: ./examples/undistort_output.png "Undistorted"
-[imageBinarized]: ./test_images/test1.jpg "Binarized"
-[imagePerspective]: ./examples/binary_combo_example.jpg "Perspective Image"
-[imageTransformed]: ./examples/warped_straight_lines.jpg "Bird View"
-[imageQuadratic]: ./examples/color_fit_lines.jpg "Quadratic Fit"
-[imageOutput]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video" 
+[imageDistort]: ./camera_cal/calibration5.jpg "Distorted"
+[imageUndistort]: ./output_images/undistorted.jpg "Undistorted"
+[imageBinarized]: ./output_images/binarized.jpg "Binarized"
+[imagePerspective]: ./test_images/test2.jpg "Perspective Image"
+[imageTransformed]: ./output_images/birdview.jpg "Bird View"
+[imageQuadratic]: ./output_images/quadraticfit.jpg "Quadratic Fit"
+[imageOutput]: ./output_images/output.jpg "Output"
+[video1]: ./out.mp4 "Video" 
 
 ---
 Please find all the code mentioned beyond in the Jupyter Notebook "AdvancedLaneFinding.ipynb".
