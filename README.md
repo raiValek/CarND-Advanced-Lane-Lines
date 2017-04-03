@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 [imageBinarized]: ./output_images/binarized.jpg "Binarized"
 [imagePerspective]: ./test_images/test2.jpg "Perspective Image"
 [imageTransformed]: ./output_images/birdview.jpg "Bird View"
-[imageQuadratic]: ./output_images/quadraticfit.jpg "Quadratic Fit"
+[imageQuadratic]: ./output_images/quadraticfit.png "Quadratic Fit"
 [imageOutput]: ./output_images/output.jpg "Output"
 [video1]: ./out.mp4 "Video" 
 
@@ -27,16 +27,16 @@ Please find all the code mentioned beyond in the Jupyter Notebook "AdvancedLaneF
 
 ### 1. Camera Calibration
 
-In the first cell of the Notebook the camera calibration coefficients get calculated. I use some images of a chessboard pattern acquired in different angles for this. The corners of the squares can be automatically found by the OpenCV method 'findChessboardCorners' and save all the twodimensional corner coordinates in the array `imgpoints`. The array `objpoints` holds the undistorted threedimensional coordinates of the chessboard pattern in the world. They start with (0,0,0) in the upper left and end with (9,6,0) in the lower right, asuming they all lay in the same z plane. Finally the method `calibrateCamera` takes object and image points and calculates the distortion coefficients. The calibration images 1, 4 and 5 can't be used for calibration since not all corners are visible, but the result with the remaining images is sufficient. By using the method `undistort` to an distorted image one can get the following result: 
+In the first cell of the Notebook the camera calibration coefficients get calculated. I use some images of a chessboard pattern acquired in different angles for this. The corners of the squares can be automatically found by the OpenCV method 'findChessboardCorners' and save all the two dimensional corner coordinates in the array `imgpoints`. The array `objpoints` holds the undistorted three dimensional coordinates of the chessboard pattern in the world. They start with (0,0,0) in the upper left and end with (9,6,0) in the lower right, assuming they all lay in the same z plane. Finally the method `calibrateCamera` takes object and image points and calculates the distortion coefficients. The calibration images 1, 4 and 5 can't be used for calibration since not all corners are visible, but the result with the remaining images is sufficient. By using the method `undistort` to an distorted image one can get the following result: 
 
 ![Distorted Image][imageDistort]
 ![Undistorted Image][imageUndistort]
 
 ### 2. Binarize Image
 
-In order to find lane lines, every unnecessary information has to be filtered out (well, at least as much as possible). For this purpose cell 3 holds some usuful methods for experimenting with gradient and color space filtering. The final binarizing pipeline I came up with can be found in cell 4 in the method 'binarize_image'. It uses the following techniques:
+In order to find lane lines, every unnecessary information has to be filtered out (well, at least as much as possible). For this purpose cell 3 holds some useful methods for experimenting with gradient and color space filtering. The final binarizing pipeline I came up with can be found in cell 4 in the method `binarize_image`. It uses the following techniques:
 
-| Nr. | Technique | Input | Kernel Size / Channel | Low/High Threshold |
+| No. | Technique | Input | Kernel Size / Channel | Low/High Threshold |
 |:---:|---|:---:|:---:|:---:| 
 | 1. | Color Space Threshold | Input Image | V Channel (HSV) | 210, 255 |
 | 2. | Direction of Gradient Conversion | 1. | 9 | 0.7, 1.3 |
@@ -67,7 +67,7 @@ The next step is to perform a quadratic fit on those points to get a second grad
 
 I combine all the steps above in cell 8 in the method `process`. The following steps will be deployed on every image:
 
-1. Udistort image
+1. Undistort image
 2. Binarize and undistort image
 3. Transform to bird view
 4. Find centroids for each lane line for each layer
@@ -89,21 +89,13 @@ To get the radius the quadratic coefficients have to be calculated again in with
 
 The position of the car is considered to be in the center of the image. The deviation of the center between the detected lane lines and the image center gives the eccentricity of the car.
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### Smoothing Output
+To smooth the lane line detection the fitted x coordinates that happened to be valid will be stored in an array first. The lane line fits which are actually deployed on the images are an average of the last 7 valid fits.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-![alt text][image6]
-
----
-
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
-
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_images/out.mp4)
 
 ---
 
 ### Discussion
-
-
-
+This interesting project showed me once more, how comprehensive it is to develop a general solution in computer vision. Even in this very specific task there are many uncertainties like color of the road marking, weather conditions, lighting, material of the pavement. Anyway, I'm happy with the robustness of this result. I have learned lots of really useful techniques and I'm looking forward to the next projects.
